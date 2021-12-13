@@ -47,12 +47,12 @@ const App = () => {
         checkoutTokenId,
         newOrder
       );
+      console.log("testherre");
       setOrder(incomingOrder);
-      console.log("test1");
+
       refreshCart();
-      // handleEmptyCart();
     } catch (error) {
-      setErrorMessage(error.data.error.message);
+      if (error) setErrorMessage(error.data.error.message);
     }
   };
 
@@ -96,8 +96,9 @@ const App = () => {
                 <Checkout
                   cart={cart}
                   order={order}
-                  onCaptureCheckout={handleCaptureCheckout}
+                  handleCaptureCheckout={handleCaptureCheckout}
                   error={errorMessage}
+                  refreshCart={refreshCart}
                 />
               }
             />

@@ -40,6 +40,17 @@ const Cart = ({
         </Typography>
         <div>
           <Button
+            className={classes.backButton}
+            component={Link}
+            to="/"
+            size="large"
+            type="button"
+            variant="contained"
+            color="primary"
+          >
+            Back to Cart
+          </Button>
+          <Button
             className={classes.emptyButton}
             size="large"
             type="button"
@@ -54,7 +65,6 @@ const Cart = ({
             size="large"
             type="button"
             variant="contained"
-            color="primary"
             component={Link}
             to="/checkout"
           >

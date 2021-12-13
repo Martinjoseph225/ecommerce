@@ -18,7 +18,13 @@ import PaymentForm from "../PaymentForm";
 
 import useStyles from "./styles";
 const steps = ["Shipping Address", "Payment datails"];
-const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
+const Checkout = ({
+  cart,
+  order,
+  error,
+  handleCaptureCheckout,
+  refreshCart,
+}) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [isFinished, setIsFinished] = useState(false);
   const [shippingData, setshippingData] = useState({});
@@ -33,7 +39,8 @@ const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
         });
         setCheckoutToken(token);
       } catch (error) {
-        history("/");
+        // history("/");
+        console.log("This is error", error);
       }
     };
     generateToken();
@@ -53,8 +60,8 @@ const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
   const timeout = () => {
     setTimeout(() => {
       setIsFinished(true);
-      console.log("trext timeout");
-    }, 3000);
+      // console.log("trext timeout");
+    }, 5000);
   };
 
   let Confirmation = () =>
@@ -111,9 +118,10 @@ const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
         shippingData={shippingData}
         checkoutToken={checkoutToken}
         backStep={backStep}
-        onCaptureCheckout={onCaptureCheckout}
+        handleCaptureCheckout={handleCaptureCheckout}
         nextStep={nextStep}
         timeout={timeout}
+        refreshCart={refreshCart}
       />
     );
   return (

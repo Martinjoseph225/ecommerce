@@ -15,11 +15,13 @@ const PaymentForm = ({
   checkoutToken,
   backStep,
   shippingData,
-  onCaptureCheckout,
+  handleCaptureCheckout,
   nextStep,
   timeout,
+  refreshCart,
 }) => {
   const handleSubmit = async (event, elements, stripe) => {
+    // console.log("testing");
     event.preventDefault();
     if (!stripe || !elements) return;
     const cardElement = elements.getElement(CardElement);
@@ -28,7 +30,7 @@ const PaymentForm = ({
       card: cardElement,
     });
     if (error) {
-      console.log(error);
+      console.log("There is error:", error);
     } else {
       const orderData = {
         line_items: checkoutToken.live.line_items,
@@ -53,9 +55,11 @@ const PaymentForm = ({
           },
         },
       };
-      onCaptureCheckout(checkoutToken.id, orderData);
+      handleCaptureCheckout(checkoutToken.id, orderData);
+      console.log("values", checkoutToken.id, orderData);
       nextStep();
       timeout();
+      refreshCart();
     }
   };
   return (
